@@ -1,0 +1,35 @@
+|count18O
+Clock => CNT_int[0].CLK
+Clock => CNT_int[1].CLK
+Clock => CNT_int[2].CLK
+Clock => CNT_int[3].CLK
+Clock => CNT_int[4].CLK
+Clock => CNT_int[5].CLK
+Clock => CNT_int[6].CLK
+Clock => CNT_int[7].CLK
+Reset => CNT_int[0].ACLR
+Reset => CNT_int[1].ACLR
+Reset => CNT_int[2].ACLR
+Reset => CNT_int[3].ACLR
+Reset => CNT_int[4].ACLR
+Reset => CNT_int[5].ACLR
+Reset => CNT_int[6].ACLR
+Reset => CNT_int[7].ACLR
+UP_DOWN => CNT_int.OUTPUTSELECT
+UP_DOWN => CNT_int.OUTPUTSELECT
+UP_DOWN => CNT_int.OUTPUTSELECT
+UP_DOWN => CNT_int.OUTPUTSELECT
+UP_DOWN => CNT_int.OUTPUTSELECT
+UP_DOWN => CNT_int.OUTPUTSELECT
+UP_DOWN => CNT_int.OUTPUTSELECT
+UP_DOWN => CNT_int.OUTPUTSELECT
+CNT[0] <= CNT_int[0].DB_MAX_OUTPUT_PORT_TYPE
+CNT[1] <= CNT_int[1].DB_MAX_OUTPUT_PORT_TYPE
+CNT[2] <= CNT_int[2].DB_MAX_OUTPUT_PORT_TYPE
+CNT[3] <= CNT_int[3].DB_MAX_OUTPUT_PORT_TYPE
+CNT[4] <= CNT_int[4].DB_MAX_OUTPUT_PORT_TYPE
+CNT[5] <= CNT_int[5].DB_MAX_OUTPUT_PORT_TYPE
+CNT[6] <= CNT_int[6].DB_MAX_OUTPUT_PORT_TYPE
+CNT[7] <= CNT_int[7].DB_MAX_OUTPUT_PORT_TYPE
+
+

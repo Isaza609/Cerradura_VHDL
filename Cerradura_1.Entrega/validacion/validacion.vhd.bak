@@ -1,0 +1,29 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity validacion is
+
+	port
+	(
+		-- Input ports
+		A	: in std_logic_vector(3 downto 0);
+		Clk : in std_logic;
+
+		-- Output ports
+		
+		
+	);
+end validacion;
+
+
+
+
+
+architecture arch_validacion of validacion is
+
+	
+begin
+
+	
+
+end arch_validacion;

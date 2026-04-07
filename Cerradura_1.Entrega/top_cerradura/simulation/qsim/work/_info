@@ -1,0 +1,81 @@
+m255
+K3
+13
+cModel Technology
+Z0 dD:\Quartus\top_cerradura\simulation\qsim
+vtop_cerradura
+Z1 IRbz=;_IDL3N;[^inR_D_T0
+Z2 VG;HXo^5@PP9KYn0WXmMX<0
+Z3 dD:\Quartus\top_cerradura\simulation\qsim
+Z4 w1775488487
+Z5 8top_cerradura.vo
+Z6 Ftop_cerradura.vo
+L0 31
+Z7 OV;L;10.1d;51
+r1
+31
+Z8 !s90 -work|work|top_cerradura.vo|
+Z9 o-work work -O0
+!i10b 1
+Z10 !s100 dC@l^kFb_45>WSWl@fBQ`0
+!s85 0
+Z11 !s108 1775488488.083000
+Z12 !s107 top_cerradura.vo|
+!s101 -O0
+vtop_cerradura_vlg_check_tst
+!i10b 1
+!s100 d4FR>=gU4FTXTl]MeE?1a1
+IWm=j[DMCzHLAM[M^zcEI43
+VeR2:O^TQhIK0]421CU`IJ3
+R3
+Z13 w1775488486
+Z14 8Waveform.vwf.vt
+Z15 FWaveform.vwf.vt
+L0 67
+R7
+r1
+!s85 0
+31
+Z16 !s108 1775488488.224000
+Z17 !s107 Waveform.vwf.vt|
+Z18 !s90 -work|work|Waveform.vwf.vt|
+!s101 -O0
+R9
+vtop_cerradura_vlg_sample_tst
+!i10b 1
+Z19 !s100 WCTVL=FW]2NP9Ajen8A?F3
+Z20 IfQ`6MlKUQK6llb;C6@=hI2
+Z21 V>D6JzUKZNfU1]P@P@Q;TV0
+R3
+R13
+R14
+R15
+L0 29
+R7
+r1
+!s85 0
+31
+R16
+R17
+R18
+!s101 -O0
+R9
+vtop_cerradura_vlg_vec_tst
+!i10b 1
+!s100 gmo6i5`Y2L5jEcIi7I<DV2
+IB^oT`bHNZ36YK;OAoG0PD2
+Z22 VSOOdg9b8c0IVhTgI68a?Q2
+R3
+R13
+R14
+R15
+L0 823
+R7
+r1
+!s85 0
+31
+R16
+R17
+R18
+!s101 -O0
+R9

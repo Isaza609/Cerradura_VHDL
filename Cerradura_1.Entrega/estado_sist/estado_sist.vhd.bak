@@ -1,0 +1,60 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+
+entity estado_sist is
+	
+	port
+	(
+		-- Input ports
+		S0, S1 	: in std_logic;
+		enable	: in std_logic;
+
+		-- Output ports
+		Disp0, Disp1, Disp2, Disp3	: std_logic_vector(0 to 6)
+		
+	);
+	
+end estado_sist;
+
+architecture arch_estado_sist of estado_sist is
+
+    signal estado : std_logic_vector(1 downto 0);
+
+begin
+
+    estado <= S1 & S0;
+
+    -- Display izquierdo
+    with enable & estado select
+        Disp3 <= "1001111" when "100", -- I   -> IDLE
+					  "1111111" when "101", -- apagado para ERR
+                 "0000001" when "110", -- O   -> OPEN
+                 "1111111" when "111", -- apagado para ALR
+                 "1111111" when others; -- apagado
+
+    -- Segundo display
+    with enable & estado select
+        Disp2 <= "1000010" when "100", -- D
+                 "0110000" when "110", -- E
+                 "0011000" when "110", -- P
+                 "0001000" when "111", -- A
+                 "1111111" when others;
+
+    -- Tercer display
+    with enable & estado select
+        Disp1 <= "1110001" when "100", -- L
+                 "1111010" when "101", -- R
+                 "0110000" when "110", -- E
+                 "1110001" when "100", -- L
+                 "1111111" when others;
+
+    -- Display derecho
+    with enable & estado select
+        Disp0 <= "0110000" when "100", -- E
+                 "1111010" when "111", -- R
+                 "1101010" when "110", -- N
+					  "1111010" when "111", -- R
+                 "1111111" when others;
+
+end arch_estado_sist;

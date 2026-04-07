@@ -1,0 +1,12 @@
+|contador_intentos
+Clock_intento => cont_int[0].CLK
+Clock_intento => cont_int[1].CLK
+Reset => cont_int[0].ACLR
+Reset => cont_int[1].ACLR
+acceso_ok => cont_int.OUTPUTSELECT
+acceso_ok => cont_int.OUTPUTSELECT
+intentos[0] <= cont_int[0].DB_MAX_OUTPUT_PORT_TYPE
+intentos[1] <= cont_int[1].DB_MAX_OUTPUT_PORT_TYPE
+alarma <= Equal0.DB_MAX_OUTPUT_PORT_TYPE
+
+

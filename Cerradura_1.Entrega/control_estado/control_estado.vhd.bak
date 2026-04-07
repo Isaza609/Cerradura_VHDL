@@ -1,0 +1,43 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity control_estado is
+    port(
+        confirmar : in  std_logic;
+        acceso_ok : in  std_logic;
+        alarma    : in  std_logic;
+
+        S0        : out std_logic;
+        S1        : out std_logic
+    );
+end entity;
+
+architecture arch_control_estado of control_estado is
+begin
+
+    process(confirmar, acceso_ok, alarma)
+    begin
+        if alarma = '1' then
+            -- ALR = 11
+            S1 <= '1';
+            S0 <= '1';
+
+        elsif confirmar = '1' then
+            if acceso_ok = '1' then
+                -- OPEN = 10
+                S1 <= '1';
+                S0 <= '0';
+            else
+                -- ERR = 01
+                S1 <= '0';
+                S0 <= '1';
+            end if;
+
+        else
+            -- IDLE = 00
+            S1 <= '0';
+            S0 <= '0';
+        end if;
+    end process;
+
+end architecture;

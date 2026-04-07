@@ -1,0 +1,49 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity temporizador_open is
+    generic(
+        DURACION : integer := 5
+    );
+    port(
+        Clock       : in  std_logic;
+        Reset       : in  std_logic;
+        iniciar     : in  std_logic;
+        open_activo : out std_logic
+    );
+end entity;
+
+architecture arch_temporizador_open of temporizador_open is
+
+    signal contando   : std_logic := '0';
+    signal contador   : integer range 0 to DURACION := 0;
+
+begin
+
+    process(Clock, Reset)
+    begin
+        if Reset = '0' then
+            contando <= '0';
+            contador <= 0;
+
+        elsif rising_edge(Clock) then
+            if contando = '0' then
+                if iniciar = '1' then
+                    contando <= '1';
+                    contador <= 1;
+                end if;
+            else
+                if contador < DURACION then
+                    contador <= contador + 1;
+                else
+                    contando <= '0';
+                    contador <= 0;
+                end if;
+            end if;
+        end if;
+    end process;
+
+    open_activo <= contando;
+
+end architecture;

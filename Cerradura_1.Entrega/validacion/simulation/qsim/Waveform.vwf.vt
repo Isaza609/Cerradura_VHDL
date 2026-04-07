@@ -1,0 +1,401 @@
+// Copyright (C) 1991-2013 Altera Corporation
+// Your use of Altera Corporation's design tools, logic functions 
+// and other software and tools, and its AMPP partner logic 
+// functions, and any output files from any of the foregoing 
+// (including device programming or simulation files), and any 
+// associated documentation or information are expressly subject 
+// to the terms and conditions of the Altera Program License 
+// Subscription Agreement, Altera MegaCore Function License 
+// Agreement, or other applicable license agreement, including, 
+// without limitation, that your use is for the sole purpose of 
+// programming logic devices manufactured by Altera and sold by 
+// Altera or its authorized distributors.  Please refer to the 
+// applicable agreement for further details.
+
+// *****************************************************************************
+// This file contains a Verilog test bench with test vectors .The test vectors  
+// are exported from a vector file in the Quartus Waveform Editor and apply to  
+// the top level entity of the current Quartus project .The user can use this   
+// testbench to simulate his design using a third-party simulation tool .       
+// *****************************************************************************
+// Generated on "04/03/2026 23:50:58"
+                                                                        
+// Verilog Self-Checking Test Bench (with test vectors) for design :    validacion
+// 
+// Simulation tool : 3rd Party
+// 
+
+`timescale 1 ps/ 1 ps
+module validacion_vlg_sample_tst(
+	clave_ingresada,
+	count18O_val,
+	sampler_tx
+);
+input [15:0] clave_ingresada;
+input [7:0] count18O_val;
+output sampler_tx;
+
+reg sample;
+time current_time;
+always @(clave_ingresada or count18O_val)
+                                                                                
+begin                                                 
+ if ($realtime > 0)                                   
+ begin                                                
+	if ($realtime == 0 || $realtime != current_time)  
+	begin									          
+		if (sample === 1'bx)                          
+			sample = 0;                               
+		else                                          
+			sample = ~sample;                         
+	end										          
+	current_time = $realtime;					      
+ end                                                  
+end                                                   
+
+assign sampler_tx = sample;
+endmodule
+
+module validacion_vlg_check_tst (
+	acceso_ok,
+	clave_ok,
+	horario_ok,
+	sampler_rx
+);
+input  acceso_ok;
+input  clave_ok;
+input  horario_ok;
+input sampler_rx;
+
+reg  acceso_ok_expected;
+reg  clave_ok_expected;
+reg  horario_ok_expected;
+
+reg  acceso_ok_prev;
+reg  clave_ok_prev;
+reg  horario_ok_prev;
+
+reg  acceso_ok_expected_prev;
+reg  clave_ok_expected_prev;
+reg  horario_ok_expected_prev;
+
+reg  last_acceso_ok_exp;
+reg  last_clave_ok_exp;
+reg  last_horario_ok_exp;
+
+reg trigger;
+
+integer i;
+integer nummismatches;
+
+reg [1:3] on_first_change ;
+
+
+initial
+begin
+trigger = 0;
+i = 0;
+nummismatches = 0;
+on_first_change = 3'b1;
+end
+
+// update real /o prevs
+
+always @(trigger)
+begin
+	acceso_ok_prev = acceso_ok;
+	clave_ok_prev = clave_ok;
+	horario_ok_prev = horario_ok;
+end
+
+// update expected /o prevs
+
+always @(trigger)
+begin
+	acceso_ok_expected_prev = acceso_ok_expected;
+	clave_ok_expected_prev = clave_ok_expected;
+	horario_ok_expected_prev = horario_ok_expected;
+end
+
+
+
+// expected acceso_ok
+initial
+begin
+	acceso_ok_expected = 1'bX;
+end 
+
+// expected clave_ok
+initial
+begin
+	clave_ok_expected = 1'bX;
+end 
+
+// expected horario_ok
+initial
+begin
+	horario_ok_expected = 1'bX;
+end 
+// generate trigger
+always @(acceso_ok_expected or acceso_ok or clave_ok_expected or clave_ok or horario_ok_expected or horario_ok)
+begin
+	trigger <= ~trigger;
+end
+
+always @(posedge sampler_rx or negedge sampler_rx)
+begin
+`ifdef debug_tbench
+	$display("Scanning pattern %d @time = %t",i,$realtime );
+	i = i + 1;
+	$display("| expected acceso_ok = %b | expected clave_ok = %b | expected horario_ok = %b | ",acceso_ok_expected_prev,clave_ok_expected_prev,horario_ok_expected_prev);
+	$display("| real acceso_ok = %b | real clave_ok = %b | real horario_ok = %b | ",acceso_ok_prev,clave_ok_prev,horario_ok_prev);
+`endif
+	if (
+		( acceso_ok_expected_prev !== 1'bx ) && ( acceso_ok_prev !== acceso_ok_expected_prev )
+		&& ((acceso_ok_expected_prev !== last_acceso_ok_exp) ||
+			on_first_change[1])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port acceso_ok :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", acceso_ok_expected_prev);
+		$display ("     Real value = %b", acceso_ok_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[1] = 1'b0;
+		last_acceso_ok_exp = acceso_ok_expected_prev;
+	end
+	if (
+		( clave_ok_expected_prev !== 1'bx ) && ( clave_ok_prev !== clave_ok_expected_prev )
+		&& ((clave_ok_expected_prev !== last_clave_ok_exp) ||
+			on_first_change[2])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port clave_ok :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", clave_ok_expected_prev);
+		$display ("     Real value = %b", clave_ok_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[2] = 1'b0;
+		last_clave_ok_exp = clave_ok_expected_prev;
+	end
+	if (
+		( horario_ok_expected_prev !== 1'bx ) && ( horario_ok_prev !== horario_ok_expected_prev )
+		&& ((horario_ok_expected_prev !== last_horario_ok_exp) ||
+			on_first_change[3])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port horario_ok :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", horario_ok_expected_prev);
+		$display ("     Real value = %b", horario_ok_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[3] = 1'b0;
+		last_horario_ok_exp = horario_ok_expected_prev;
+	end
+
+	trigger <= ~trigger;
+end
+initial 
+
+begin 
+$timeformat(-12,3," ps",6);
+#600000;
+if (nummismatches > 0)
+	$display ("%d mismatched vectors : Simulation failed !",nummismatches);
+else
+	$display ("Simulation passed !");
+$finish;
+end 
+endmodule
+
+module validacion_vlg_vec_tst();
+// constants                                           
+// general purpose registers
+reg [15:0] clave_ingresada;
+reg [7:0] count18O_val;
+// wires                                               
+wire acceso_ok;
+wire clave_ok;
+wire horario_ok;
+
+wire sampler;                             
+
+// assign statements (if any)                          
+validacion i1 (
+// port map - connection between master ports and signals/registers   
+	.acceso_ok(acceso_ok),
+	.clave_ingresada(clave_ingresada),
+	.clave_ok(clave_ok),
+	.count18O_val(count18O_val),
+	.horario_ok(horario_ok)
+);
+// clave_ingresada[ 15 ]
+initial
+begin
+	clave_ingresada[15] = 1'b0;
+	clave_ingresada[15] = #400000 1'b1;
+	clave_ingresada[15] = #100000 1'b0;
+end 
+// clave_ingresada[ 14 ]
+initial
+begin
+	clave_ingresada[14] = 1'b0;
+	clave_ingresada[14] = #300000 1'b1;
+	clave_ingresada[14] = #100000 1'b0;
+end 
+// clave_ingresada[ 13 ]
+initial
+begin
+	clave_ingresada[13] = 1'b1;
+	clave_ingresada[13] = #200000 1'b0;
+end 
+// clave_ingresada[ 12 ]
+initial
+begin
+	clave_ingresada[12] = 1'b0;
+	clave_ingresada[12] = #200000 1'b1;
+end 
+// clave_ingresada[ 11 ]
+initial
+begin
+	clave_ingresada[11] = 1'b0;
+	clave_ingresada[11] = #400000 1'b1;
+	clave_ingresada[11] = #100000 1'b0;
+end 
+// clave_ingresada[ 10 ]
+initial
+begin
+	clave_ingresada[10] = 1'b0;
+	clave_ingresada[10] = #300000 1'b1;
+	clave_ingresada[10] = #100000 1'b0;
+end 
+// clave_ingresada[ 9 ]
+initial
+begin
+	clave_ingresada[9] = 1'b0;
+	clave_ingresada[9] = #200000 1'b1;
+	clave_ingresada[9] = #200000 1'b0;
+end 
+// clave_ingresada[ 8 ]
+initial
+begin
+	clave_ingresada[8] = 1'b0;
+	clave_ingresada[8] = #400000 1'b1;
+end 
+// clave_ingresada[ 7 ]
+initial
+begin
+	clave_ingresada[7] = 1'b0;
+	clave_ingresada[7] = #400000 1'b1;
+	clave_ingresada[7] = #100000 1'b0;
+end 
+// clave_ingresada[ 6 ]
+initial
+begin
+	clave_ingresada[6] = 1'b1;
+	clave_ingresada[6] = #200000 1'b0;
+	clave_ingresada[6] = #100000 1'b1;
+	clave_ingresada[6] = #100000 1'b0;
+end 
+// clave_ingresada[ 5 ]
+initial
+begin
+	clave_ingresada[5] = 1'b1;
+	clave_ingresada[5] = #400000 1'b0;
+end 
+// clave_ingresada[ 4 ]
+initial
+begin
+	clave_ingresada[4] = 1'b1;
+end 
+// clave_ingresada[ 3 ]
+initial
+begin
+	clave_ingresada[3] = 1'b0;
+	clave_ingresada[3] = #300000 1'b1;
+	clave_ingresada[3] = #200000 1'b0;
+end 
+// clave_ingresada[ 2 ]
+initial
+begin
+	clave_ingresada[2] = 1'b0;
+	clave_ingresada[2] = #200000 1'b1;
+	clave_ingresada[2] = #100000 1'b0;
+end 
+// clave_ingresada[ 1 ]
+initial
+begin
+	clave_ingresada[1] = 1'b1;
+	clave_ingresada[1] = #200000 1'b0;
+end 
+// clave_ingresada[ 0 ]
+initial
+begin
+	clave_ingresada[0] = 1'b1;
+	clave_ingresada[0] = #200000 1'b0;
+	clave_ingresada[0] = #200000 1'b1;
+end 
+// count18O_val[ 7 ]
+initial
+begin
+	count18O_val[7] = 1'b0;
+	count18O_val[7] = #300000 1'b1;
+	count18O_val[7] = #100000 1'b0;
+end 
+// count18O_val[ 6 ]
+initial
+begin
+	count18O_val[6] = 1'b0;
+	count18O_val[6] = #100000 1'b1;
+	count18O_val[6] = #200000 1'b0;
+end 
+// count18O_val[ 5 ]
+initial
+begin
+	count18O_val[5] = 1'b0;
+end 
+// count18O_val[ 4 ]
+initial
+begin
+	count18O_val[4] = 1'b0;
+	count18O_val[4] = #100000 1'b1;
+end 
+// count18O_val[ 3 ]
+initial
+begin
+	count18O_val[3] = 1'b1;
+	count18O_val[3] = #100000 1'b0;
+	count18O_val[3] = #100000 1'b1;
+	count18O_val[3] = #100000 1'b0;
+end 
+// count18O_val[ 2 ]
+initial
+begin
+	count18O_val[2] = 1'b0;
+	count18O_val[2] = #300000 1'b1;
+end 
+// count18O_val[ 1 ]
+initial
+begin
+	count18O_val[1] = 1'b1;
+	count18O_val[1] = #100000 1'b0;
+	count18O_val[1] = #100000 1'b1;
+	count18O_val[1] = #200000 1'b0;
+end 
+// count18O_val[ 0 ]
+initial
+begin
+	count18O_val[0] = 1'b0;
+end 
+
+validacion_vlg_sample_tst tb_sample (
+	.clave_ingresada(clave_ingresada),
+	.count18O_val(count18O_val),
+	.sampler_tx(sampler)
+);
+
+validacion_vlg_check_tst tb_out(
+	.acceso_ok(acceso_ok),
+	.clave_ok(clave_ok),
+	.horario_ok(horario_ok),
+	.sampler_rx(sampler)
+);
+endmodule
+

@@ -1,0 +1,12 @@
+|control_estado
+confirmar => process_0.IN0
+confirmar => process_0.IN0
+acceso_ok => process_0.IN1
+acceso_ok => process_0.IN1
+alarma => S1.OUTPUTSELECT
+alarma => S0.OUTPUTSELECT
+open_activo => process_0.IN1
+S0 <= S0.DB_MAX_OUTPUT_PORT_TYPE
+S1 <= S1.DB_MAX_OUTPUT_PORT_TYPE
+
+

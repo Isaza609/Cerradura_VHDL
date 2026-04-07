@@ -1,0 +1,16 @@
+vendor_name = ModelSim
+source_file = 1, D:/Quartus/control_estado/control_estado.vhd
+source_file = 1, D:/Quartus/control_estado/db/control_estado.cbx.xml
+source_file = 1, d:/quartus/quartus/libraries/vhdl/ieee/prmtvs_b.vhd
+source_file = 1, d:/quartus/quartus/libraries/vhdl/ieee/prmtvs_p.vhd
+source_file = 1, d:/quartus/quartus/libraries/vhdl/ieee/timing_b.vhd
+source_file = 1, d:/quartus/quartus/libraries/vhdl/ieee/timing_p.vhd
+design_name = control_estado
+instance = comp, \S0~output\, S0~output, control_estado, 1
+instance = comp, \S1~output\, S1~output, control_estado, 1
+instance = comp, \open_activo~input\, open_activo~input, control_estado, 1
+instance = comp, \alarma~input\, alarma~input, control_estado, 1
+instance = comp, \confirmar~input\, confirmar~input, control_estado, 1
+instance = comp, \acceso_ok~input\, acceso_ok~input, control_estado, 1
+instance = comp, \S0~0\, S0~0, control_estado, 1
+instance = comp, \S1~0\, S1~0, control_estado, 1

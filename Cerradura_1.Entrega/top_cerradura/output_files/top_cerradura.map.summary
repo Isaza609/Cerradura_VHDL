@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Mon Apr 06 17:26:13 2026
+Quartus II 64-Bit Version : 13.1.0 Build 162 10/23/2013 SJ Web Edition
+Revision Name : top_cerradura
+Top-level Entity Name : top_cerradura
+Family : Cyclone III
+Total logic elements : 143
+    Total combinational functions : 127
+    Dedicated logic registers : 56
+Total registers : 56
+Total pins : 45
+Total virtual pins : 0
+Total memory bits : 0
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 0

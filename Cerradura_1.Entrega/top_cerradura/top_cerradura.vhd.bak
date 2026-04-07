@@ -1,0 +1,154 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity top_cerradura is
+    port(
+        -- Entradas principales
+        Clock_reg   : in  std_logic;  -- botón/reloj para cargar cada digito de la clave
+        Reset       : in  std_logic;  -- reset general
+        Din         : in  std_logic_vector(3 downto 0); -- switches
+        confirmar   : in  std_logic;  -- botón de confirmación de clave
+
+        -- Entradas para count18O
+        Clock_count : in  std_logic;  -- reloj del contador horario de acceso
+        UP_DOWN     : in  std_logic;  -- dirección del count18O
+
+        -- Salidas displays
+        Disp0       : out std_logic_vector(0 to 6);
+        Disp1       : out std_logic_vector(0 to 6);
+        Disp2       : out std_logic_vector(0 to 6);
+        Disp3       : out std_logic_vector(0 to 6);
+
+        -- LEDs opcionales de depuración
+        LED_acceso  : out std_logic;
+        LED_clave   : out std_logic;
+        LED_horario : out std_logic
+    );
+end entity;
+
+architecture arch_top_cerradura of top_cerradura is
+
+    component shift_register
+        port(
+            Clock, Reset : in std_logic;
+            Din          : in std_logic_vector(3 downto 0);
+            Dout0        : out std_logic_vector(3 downto 0);
+            Dout1        : out std_logic_vector(3 downto 0);
+            Dout2        : out std_logic_vector(3 downto 0);
+            Dout3        : out std_logic_vector(3 downto 0)
+        );
+    end component;
+
+    component count18O
+        port(
+            Clock   : in  std_logic;
+            Reset   : in  std_logic;
+            UP_DOWN : in  std_logic;
+            CNT     : out std_logic_vector(7 downto 0)
+        );
+    end component;
+
+    component validacion
+        port(
+            clave_ingresada : in  std_logic_vector(15 downto 0);
+            count18O_val    : in  std_logic_vector(7 downto 0);
+            clave_ok        : out std_logic;
+            horario_ok      : out std_logic;
+            acceso_ok       : out std_logic
+        );
+    end component;
+
+    component control_estado
+        port(
+            confirmar : in  std_logic;
+            acceso_ok : in  std_logic;
+            alarma    : in  std_logic;
+            S0        : out std_logic;
+            S1        : out std_logic
+        );
+    end component;
+
+    component estado_sist
+        port(
+            S0, S1 : in std_logic;
+            Disp0  : out std_logic_vector(0 to 6);
+            Disp1  : out std_logic_vector(0 to 6);
+            Disp2  : out std_logic_vector(0 to 6);
+            Disp3  : out std_logic_vector(0 to 6)
+        );
+    end component;
+
+    signal D0, D1, D2, D3 : std_logic_vector(3 downto 0);
+    signal clave_int      : std_logic_vector(15 downto 0);
+    signal cnt18O_int     : std_logic_vector(7 downto 0);
+
+    signal clave_ok_int   : std_logic;
+    signal horario_ok_int : std_logic;
+    signal acceso_ok_int  : std_logic;
+
+    signal s0_int         : std_logic;
+    signal s1_int         : std_logic;
+
+    signal alarma_int     : std_logic;
+
+begin
+
+    -- Por ahora no hay alarma real integrada
+    alarma_int <= '0';
+
+    -- Registro de desplazamiento para armar la clave
+    U1 : shift_register port map(
+            Clock => Clock_reg,
+            Reset => Reset,
+            Din   => Din,
+            Dout0 => D0,
+            Dout1 => D1,
+            Dout2 => D2,
+            Dout3 => D3
+        );
+
+    -- Concatenación corregida para formar 2073 al ingresar 3,7,0,2
+    clave_int <= D0 & D1 & D2 & D3;
+
+    -- Contador horario
+    U2 : count18O port map(
+            Clock   => Clock_count,
+            Reset   => Reset,
+            UP_DOWN => UP_DOWN,
+            CNT     => cnt18O_int
+        );
+
+    -- Validación de clave y horario
+    U3 : validacion port map(
+            clave_ingresada => clave_int,
+            count18O_val    => cnt18O_int,
+            clave_ok        => clave_ok_int,
+            horario_ok      => horario_ok_int,
+            acceso_ok       => acceso_ok_int
+        );
+
+    -- Control de estado
+    U4 : control_estado port map(
+            confirmar => confirmar,
+            acceso_ok => acceso_ok_int,
+            alarma    => alarma_int,
+            S0        => s0_int,
+            S1        => s1_int
+        );
+
+    -- Visualización del estado en displays
+    U5 : estado_sist port map(
+            S0    => s0_int,
+            S1    => s1_int,
+            Disp0 => Disp0,
+            Disp1 => Disp1,
+            Disp2 => Disp2,
+            Disp3 => Disp3
+        );
+
+    -- LEDs de depuración
+    LED_acceso  <= acceso_ok_int;
+    LED_clave   <= clave_ok_int;
+    LED_horario <= horario_ok_int;
+
+end architecture;

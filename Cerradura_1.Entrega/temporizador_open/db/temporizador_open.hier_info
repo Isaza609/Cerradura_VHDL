@@ -1,0 +1,16 @@
+|temporizador_open
+Clock => contador[0].CLK
+Clock => contador[1].CLK
+Clock => contador[2].CLK
+Clock => contando.CLK
+Reset => contador[0].ACLR
+Reset => contador[1].ACLR
+Reset => contador[2].ACLR
+Reset => contando.ACLR
+iniciar => contando.OUTPUTSELECT
+iniciar => contador.OUTPUTSELECT
+iniciar => contador.OUTPUTSELECT
+iniciar => contador.OUTPUTSELECT
+open_activo <= contando.DB_MAX_OUTPUT_PORT_TYPE
+
+
