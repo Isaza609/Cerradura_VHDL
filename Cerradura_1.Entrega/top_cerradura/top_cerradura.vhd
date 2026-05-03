@@ -12,6 +12,7 @@ entity top_cerradura is
         Din          : in  std_logic_vector(3 downto 0);
         confirmar    : in  std_logic;
         UP_DOWN      : in  std_logic;
+        sensor_puerta: in  std_logic;
 
         -- Salidas displays
         Disp0        : out std_logic_vector(0 to 6);
@@ -84,6 +85,8 @@ architecture arch_top_cerradura of top_cerradura is
             Clock_intento : in  std_logic;
             Reset         : in  std_logic;
             acceso_ok     : in  std_logic;
+            Clock_1Hz     : in  std_logic;
+            sensor_puerta : in  std_logic;
             intentos      : out std_logic_vector(1 downto 0);
             alarma        : out std_logic
         );
@@ -107,6 +110,7 @@ architecture arch_top_cerradura of top_cerradura is
             acceso_ok   : in  std_logic;
             alarma      : in  std_logic;
             open_activo : in  std_logic;
+            sensor_puerta : in std_logic;
             S0          : out std_logic;
             S1          : out std_logic
         );
@@ -200,6 +204,8 @@ begin
         Clock_intento => confirmar_int,
         Reset         => Reset,
         acceso_ok     => acceso_ok_int,
+        Clock_1Hz     => clk_count_int,
+        sensor_puerta => sensor_puerta,
         intentos      => intentos_int,
         alarma        => alarma_int
     );
@@ -226,6 +232,7 @@ begin
         acceso_ok   => acceso_ok_int,
         alarma      => alarma_int,
         open_activo => open_activo_int,
+        sensor_puerta => sensor_puerta,
         S0          => s0_int,
         S1          => s1_int
     );
