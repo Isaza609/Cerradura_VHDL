@@ -1,0 +1,3 @@
+- responder en español.
+- documentar los cambios realizados en español.
+- esto se prueba en quartus, por lo que debe ser en VHDL.
